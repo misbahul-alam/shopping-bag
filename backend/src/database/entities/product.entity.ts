@@ -13,7 +13,7 @@ import { ProductImage } from './product-image.entity';
 import { OrderItem } from './order-item.entity';
 import { Cart } from './cart.entity';
 
-@Entity()
+@Entity('products')
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;

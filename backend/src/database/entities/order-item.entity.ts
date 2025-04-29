@@ -8,7 +8,7 @@ import {
 import { Order } from './order.entity'; // Assuming you have an Order entity
 import { Product } from './product.entity'; // Assuming you have a Product entity
 
-@Entity()
+@Entity('order_items')
 export class OrderItem {
   @PrimaryGeneratedColumn('uuid')
   id: string;

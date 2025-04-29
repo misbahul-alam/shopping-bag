@@ -3,7 +3,6 @@ import {
   Entity,
   JoinColumn,
   ManyToMany,
-  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -12,7 +11,7 @@ import { User } from './user.entity';
 import { Address } from './address.entity';
 import { OrderItem } from './order-item.entity';
 
-@Entity()
+@Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
