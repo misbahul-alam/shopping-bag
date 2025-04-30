@@ -1,11 +1,11 @@
 import { UserRole } from 'src/common/enums/user-role.enum';
 import {
   Column,
+  CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Order } from './order.entity';
 import { Cart } from './cart.entity';
@@ -27,8 +27,14 @@ export class User {
   @Column({ enum: UserRole, default: UserRole.USER })
   role: UserRole;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
   password: string;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
 
   @OneToMany(() => Order, (order) => order.user)
   orders: Order[];
