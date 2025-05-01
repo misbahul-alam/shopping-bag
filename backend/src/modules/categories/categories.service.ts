@@ -1,26 +1,64 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Category } from 'src/database/entities/category.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CategoriesService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  constructor(
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+  ) {}
+  async CreateCategory(createCategoryDto: CreateCategoryDto) {
+    const { name, slug, description } = createCategoryDto;
+    const category = await this.categoryRepository.findOne({ where: { slug } });
+
+    if (category) {
+      throw new BadRequestException('Category already exists');
+    }
+    const newCategory = this.categoryRepository.create({
+      name,
+      slug,
+      description,
+    });
+    if (!newCategory) {
+      throw new BadRequestException('Category not created');
+    }
+    await this.categoryRepository.save(newCategory);
+    return newCategory;
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  async findAll() {
+    const categories = await this.categoryRepository.find();
+    return categories;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new BadRequestException('Category not found');
+    }
+    return category;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    const category = this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new BadRequestException('Category not found');
+    }
+    const updatedCategory = this.categoryRepository.update(
+      { id },
+      updateCategoryDto,
+    );
+    if (!updatedCategory) {
+      throw new BadRequestException('Category not updated');
+    }
+    return updatedCategory;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} category`;
   }
 }

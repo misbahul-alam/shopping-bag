@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Product } from './product.entity';
 
 @Entity('categories')
@@ -15,7 +22,15 @@ export class Category {
   @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({
+    default:
+      'https://res.cloudinary.com/misbahulalam/image/upload/v1746076044/photo_g8izaf.png',
+  })
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
   image: string;
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
