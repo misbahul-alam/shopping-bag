@@ -27,8 +27,10 @@ export class Product {
   @Column({ nullable: true })
   description: string;
 
-  @ManyToOne(() => Category, (category) => category.products, { eager: true })
-  @JoinColumn({ name: 'category_id' })
+  @ManyToOne(() => Category, (category) => category.products, {
+    eager: true,
+    onDelete: 'SET NULL',
+  })
   category: Category;
 
   @OneToMany(() => ProductImage, (productImage) => productImage.product, {

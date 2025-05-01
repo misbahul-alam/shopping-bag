@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,7 +21,7 @@ export class CategoriesService {
     const category = await this.categoryRepository.findOne({ where: { slug } });
 
     if (category) {
-      throw new BadRequestException('Category already exists');
+      throw new ConflictException('Category already exists');
     }
     const newCategory = this.categoryRepository.create({
       name,
@@ -24,7 +29,7 @@ export class CategoriesService {
       description,
     });
     if (!newCategory) {
-      throw new BadRequestException('Category not created');
+      throw new NotFoundException('Category not created');
     }
     await this.categoryRepository.save(newCategory);
     return newCategory;
@@ -38,7 +43,7 @@ export class CategoriesService {
   async findOne(id: string) {
     const category = await this.categoryRepository.findOne({ where: { id } });
     if (!category) {
-      throw new BadRequestException('Category not found');
+      throw new NotFoundException('Category not found');
     }
     return category;
   }
@@ -46,7 +51,7 @@ export class CategoriesService {
   update(id: string, updateCategoryDto: UpdateCategoryDto) {
     const category = this.categoryRepository.findOne({ where: { id } });
     if (!category) {
-      throw new BadRequestException('Category not found');
+      throw new NotFoundException('Category not found');
     }
     const updatedCategory = this.categoryRepository.update(
       { id },
