@@ -15,11 +15,9 @@ export class Cart {
   @ManyToOne(() => User, (user) => user.cart)
   @JoinColumn({ name: 'user_id' })
   user: User;
-  @ManyToOne(() => Product, (product) => product.carts)
+  @ManyToOne(() => Product, (product) => product.carts, { eager: true })
   @JoinColumn({ name: 'product_id' })
   product: Product;
   @Column()
   quantity: number;
-  @Column()
-  total_price: number;
 }
