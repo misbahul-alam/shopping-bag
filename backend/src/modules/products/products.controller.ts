@@ -16,27 +16,34 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  addProduct(@Body() createProductDto: CreateProductDto) {
+    return this.productsService.addProduct(createProductDto);
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAllProduct() {
+    return this.productsService.findAllProduct();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(id);
+  findById(@Param('id') id: string) {
+    return this.productsService.findById(id);
+  }
+  @Get('slug/:id')
+  findBySlug(@Param('slug') slug: string) {
+    return this.productsService.findBySlug(slug);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(id, updateProductDto);
+  updateProduct(
+    @Param('id') id: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
+    return this.productsService.updateProduct(id, updateProductDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(id);
+  deleteProduct(@Param('id') id: string) {
+    return this.productsService.deleteProduct(id);
   }
 }

@@ -21,7 +21,7 @@ export class ProductsService {
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
   ) {}
-  async create(createProductDto: CreateProductDto) {
+  async addProduct(createProductDto: CreateProductDto) {
     const {
       name,
       slug,
@@ -65,12 +65,12 @@ export class ProductsService {
     return savedProduct;
   }
 
-  async findAll() {
+  async findAllProduct() {
     const products = await this.productRepository.find();
     return products;
   }
 
-  async findOne(id: string) {
+  async findById(id: string) {
     const product = await this.productRepository.findOneBy({ id });
 
     if (!product) {
@@ -79,11 +79,20 @@ export class ProductsService {
     return product;
   }
 
-  update(id: string, updateProductDto: UpdateProductDto) {
+  async findBySlug(slug: string) {
+    const product = await this.productRepository.findOneBy({ slug });
+
+    if (!product) {
+      throw new NotFoundException(`Product not found`);
+    }
+    return product;
+  }
+
+  updateProduct(id: string, updateProductDto: UpdateProductDto) {
     return `This action updates a #${id} product`;
   }
 
-  async remove(id: string) {
+  async deleteProduct(id: string) {
     const deletedProduct = await this.productRepository.delete({ id });
     if (!deletedProduct) {
       throw new BadRequestException(`Product with id ${id} deletion failed`);

@@ -16,7 +16,7 @@ export class CategoriesService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
   ) {}
-  async CreateCategory(createCategoryDto: CreateCategoryDto) {
+  async addCategory(createCategoryDto: CreateCategoryDto) {
     const { name, slug, description } = createCategoryDto;
     const category = await this.categoryRepository.findOne({ where: { slug } });
 
@@ -35,12 +35,12 @@ export class CategoriesService {
     return newCategory;
   }
 
-  async findAll() {
+  async findAllCategory() {
     const categories = await this.categoryRepository.find();
     return categories;
   }
 
-  async findOne(id: string) {
+  async findCategoryById(id: string) {
     const category = await this.categoryRepository.findOne({ where: { id } });
     if (!category) {
       throw new NotFoundException('Category not found');
@@ -48,7 +48,7 @@ export class CategoriesService {
     return category;
   }
 
-  update(id: string, updateCategoryDto: UpdateCategoryDto) {
+  updateCategory(id: string, updateCategoryDto: UpdateCategoryDto) {
     const category = this.categoryRepository.findOne({ where: { id } });
     if (!category) {
       throw new NotFoundException('Category not found');
@@ -63,7 +63,7 @@ export class CategoriesService {
     return updatedCategory;
   }
 
-  remove(id: string) {
+  deleteCategory(id: string) {
     return `This action removes a #${id} category`;
   }
 }
