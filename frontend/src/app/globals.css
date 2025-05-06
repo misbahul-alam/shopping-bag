@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@layer components {
+  .layout {
+    @apply px-[5%];
+  }
+}

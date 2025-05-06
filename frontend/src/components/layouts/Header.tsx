@@ -1,10 +1,17 @@
+import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
-import { IoCartSharp } from "react-icons/io5";
+import { HiMiniUserCircle } from "react-icons/hi2";
+import {
+  IoCartSharp,
+  IoPeople,
+  IoPeopleCircleSharp,
+  IoPeopleSharp,
+} from "react-icons/io5";
 
 export default function Header() {
   return (
-    <header>
-      <div className="h-8 w-full border-b border-gray-100 flex items-center justify-between px-[5%] bg-blue-500">
+    <header className="bg-white sticky top-0 z-50">
+      <div className="layout h-8 w-full border-b border-gray-100 flex items-center justify-between bg-blue-600">
         <p className="text-gray-200 text-xs font-medium">
           FREE delivery & 40% Discount for next 3 orders! Place your 1st order
           in.
@@ -27,10 +34,10 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <div className="h-14 w-full border-b border-gray-100 flex items-center justify-between px-[5%]">
+      <div className="layout h-14 w-full border-b border-gray-100 flex items-center justify-between ">
         <div className="flex gap-6">
-          <a
-            href=""
+          <Link
+            href="/"
             className="flex items-center gap-2 uppercase font-medium text-4xl"
           >
             <img
@@ -39,19 +46,22 @@ export default function Header() {
               className="h-8 w-auto"
             />
             <h1 className="text-blue-600 text-2xl font-bold">
-              Shopping<span className="text-gray-900 font-semibold">Bag</span>
+              Shopping<span className="text-gray-950 font-semibold">Bag</span>
             </h1>
-          </a>
+          </Link>
           <ul className="flex items-center">
             <li className="flex items-center">
-              <a href="" className="text-lg font-medium text-gray-800 px-2">
+              <Link href="/" className="text-lg font-medium text-gray-800 px-2">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="flex items-center">
-              <a href="" className="text-lg font-medium text-gray-800 px-2">
+              <Link
+                href="/shop"
+                className="text-lg font-medium text-gray-800 px-2"
+              >
                 Shop
-              </a>
+              </Link>
             </li>
             <li className="flex items-center">
               <a href="" className="text-lg font-medium text-gray-800 px-2">
@@ -59,14 +69,20 @@ export default function Header() {
               </a>
             </li>
             <li className="flex items-center">
-              <a href="" className="text-lg font-medium text-gray-800 px-2">
+              <Link
+                href="/login"
+                className="text-lg font-medium text-gray-800 px-2"
+              >
                 Login
-              </a>
+              </Link>
             </li>
             <li className="flex items-center">
-              <a href="" className="text-lg font-medium text-gray-800 px-2">
+              <Link
+                href="/register"
+                className="text-lg font-medium text-gray-800 px-2"
+              >
                 Register
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -87,7 +103,7 @@ export default function Header() {
               <IoCartSharp className="text-2xl text-gray-800" />
             </button>
             <button className="cursor-pointer">
-              <IoCartSharp className="text-2xl text-gray-800" />
+              <HiMiniUserCircle className="text-2xl text-gray-800" />
             </button>
           </div>
         </div>
