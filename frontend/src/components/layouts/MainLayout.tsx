@@ -8,7 +8,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <main className="mb-4">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

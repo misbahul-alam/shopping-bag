@@ -1,7 +1,12 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @layer components {
   .layout {
     @apply px-[5%];
+  }
+
+  .min-height {
+    min-height: calc(100vh - 5.5rem); /* raw CSS is fine here */
   }
 }

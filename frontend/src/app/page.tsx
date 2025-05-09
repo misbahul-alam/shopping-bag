@@ -1,4 +1,6 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import Button from "@/components/widgets/Button";
+import TextField from "@/components/widgets/TextField";
 import React from "react";
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
         <p className="text-gray-700 text-sm">
           A shopping bag app built with Next.js and Chakra UI
         </p>
+        <Button label={"Add To Cart"}/>
+        <TextField label={"Search"} />
       </div>
     </MainLayout>
   );
