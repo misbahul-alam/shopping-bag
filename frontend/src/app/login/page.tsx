@@ -53,7 +53,7 @@ export default function page() {
                   Forget password
                 </Link>
               </div>
-              <Button label="Login" />
+              <Button label="Login" className="w-full" />
 
               <p className="text-sm font-light text-gray-500 ">
                 I have no account,{" "}

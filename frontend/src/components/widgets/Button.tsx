@@ -18,7 +18,7 @@ export default function Button({
   return (
     <button
       className={twMerge(
-        "btn rounded-lg btn-lg btn-soft w-full bg-blue-600 text-white font-normal text-base",
+        "btn rounded-lg btn-lg btn-soft bg-blue-600 text-white font-normal text-base border-none",
         className
       )}
       onClick={onClick}
