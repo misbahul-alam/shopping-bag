@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
+import AdminMenu from "./AdminMenu";
 
 type LayoutProps = {
   children: ReactNode;
@@ -22,15 +23,9 @@ const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-white text-base-content h-full w-80 ">
-            {/* Sidebar content here */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
+          <div className=" bg-white text-base-content h-full w-80 ">
+            <AdminMenu />
+          </div>
         </div>
       </div>
     </div>
