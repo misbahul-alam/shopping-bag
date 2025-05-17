@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { HiEye } from "react-icons/hi";
 import { HiEyeOff } from "react-icons/hi";
+import { twMerge } from "tailwind-merge";
 interface TextFieldProps {
   label: string;
   name: string;
   onClick?: () => void;
   disabled?: boolean;
+  className?: string;
   require?: boolean;
   icon?: React.ReactNode;
   type?: "text" | "email" | "password" | "search" | "tel" | "url";
@@ -15,6 +17,7 @@ interface TextFieldProps {
 export default function TextField({
   label,
   name,
+  className,
   onClick,
   icon,
   require = false,
@@ -44,7 +47,12 @@ export default function TextField({
       <label className="label pb-0">
         <span className="label-text">{label}</span>
       </label>
-      <div className="input input-lg rounded-lg input-bordered flex items-center gap-2 w-full focus-within:outline-none  focus-within:border-gray-300">
+      <div
+        className={twMerge(
+          "input input-lg rounded-lg input-bordered flex items-center gap-2 w-full focus-within:outline-none  focus-within:border-gray-300",
+          className
+        )}
+      >
         <span className="h-5 opacity-70 text-xl">{icon}</span>
 
         <input

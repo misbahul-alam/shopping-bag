@@ -1,9 +1,8 @@
-import AdminLayout from "@/components/layouts/AdminLayout";
 import React from "react";
 
 export default function page() {
   return (
-    <AdminLayout>
+    <>
       <div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
@@ -136,6 +135,6 @@ export default function page() {
           natus mollitia saepe sequi modi id?
         </p>
       </div>
-    </AdminLayout>
+    </>
   );
 }

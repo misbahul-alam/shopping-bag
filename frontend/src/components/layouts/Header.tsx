@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import { HiMiniUserCircle } from "react-icons/hi2";
-import {
-  IoCartSharp,
-  IoPeople,
-  IoPeopleCircleSharp,
-  IoPeopleSharp,
-} from "react-icons/io5";
+import { IoCartSharp } from "react-icons/io5";
 
 export default function Header() {
   return (

@@ -43,10 +43,10 @@ export class Product {
   carts: Cart[];
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  original_price: number;
+  regular_price: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  discounted_price: number;
+  selling_price: number;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   orders: OrderItem[];
