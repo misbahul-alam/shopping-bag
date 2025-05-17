@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import AdminMenu from "./AdminMenu";
+import { FiMenu } from "react-icons/fi";
 
 type LayoutProps = {
   children: ReactNode;
@@ -23,15 +24,18 @@ const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
             Shopping<span className="text-gray-950 font-semibold">Bag</span>
           </h1>
         </Link>
+        <label htmlFor="admin-drawer">
+          <FiMenu className="text-2xl" />
+        </label>
       </div>
       <div className="drawer md:drawer-open bg-gray-50">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <input id="admin-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           <main className="px-3 py-2 ">{children}</main>
         </div>
         <div className="drawer-side top-14 border-r border-gray-200">
           <label
-            htmlFor="my-drawer"
+            htmlFor="admin-drawer"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>

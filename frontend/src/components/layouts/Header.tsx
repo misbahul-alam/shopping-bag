@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
+import { HiMenu } from "react-icons/hi";
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { IoCartSharp } from "react-icons/io5";
 
 export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-50">
-      <div className="layout h-8 w-full border-b border-gray-100 flex items-center justify-between bg-blue-600">
+      <div className="layout h-8 w-full border-b border-gray-100 md:flex items-center justify-between bg-blue-600 hidden">
         <p className="text-gray-200 text-xs font-medium">
           FREE delivery & 40% Discount for next 3 orders! Place your 1st order
           in.
@@ -44,7 +45,7 @@ export default function Header() {
               Shopping<span className="text-gray-950 font-semibold">Bag</span>
             </h1>
           </Link>
-          <ul className="flex items-center">
+          <ul className="md:flex items-center hidden">
             <li className="flex items-center">
               <Link href="/" className="text-lg font-medium text-gray-800 px-2">
                 Home
@@ -82,8 +83,8 @@ export default function Header() {
           </ul>
         </div>
 
-        <div className="flex items-center gap-4 min-w-md">
-          <form className="flex items-center  bg-gray-100 rounded-md h-10 max-w-md w-full">
+        <div className="flex items-center gap-4 md:min-w-md justify-end">
+          <form className="md:flex items-center bg-gray-100 rounded-md h-10 max-w-md w-full hidden">
             <input
               type="text"
               placeholder="Search proudcts.."
@@ -97,8 +98,11 @@ export default function Header() {
             <button className="cursor-pointer">
               <IoCartSharp className="text-2xl text-gray-800" />
             </button>
-            <button className="cursor-pointer">
+            <button className="cursor-pointer hidden md:flex">
               <HiMiniUserCircle className="text-2xl text-gray-800" />
+            </button>
+            <button className="cursor-pointer md:hidden">
+              <HiMenu className="text-2xl text-gray-800" />
             </button>
           </div>
         </div>

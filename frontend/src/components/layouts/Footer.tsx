@@ -7,7 +7,7 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer>
-      <div className="layout grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-5 pb-5 pt-8 bg-slate-100">
+      <div className="layout grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] grid-cols-1 gap-5 pb-5 pt-8 bg-slate-100">
         <div>
           <h2 className="text-xl font-semibold mb-2 text-slate-950">
             Do You Need Help?
@@ -130,7 +130,7 @@ export default function Footer() {
         </div>
       </div>
       <div>
-        <div className="layout h-10 w-full border-t border-slate-200 flex items-center justify-between bg-slate-100 ">
+        <div className="layout h-10 w-full border-t border-slate-200 flex items-center justify-between bg-slate-100 flex-col-reverse md:flex-row gap-2">
           <p className="text-slate-800 text-sm font-medium">
             © 2025 Shopping Bag. All rights reserved.
           </p>

@@ -3,7 +3,7 @@ import React from "react";
 import { AiFillDashboard, AiFillFolder, AiFillProduct } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
-import { IoPowerSharp } from "react-icons/io5";
+import { IoPeopleSharp, IoPowerSharp } from "react-icons/io5";
 import { RiShoppingBag4Fill } from "react-icons/ri";
 
 export default function AdminMenu() {
@@ -44,6 +44,15 @@ export default function AdminMenu() {
           >
             <RiShoppingBag4Fill className="text-xl" />
             <span className="text-base">Orders</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/admin"
+            className="flex items-center gap-2 px-4 py-2.5 hover:bg-gray-100 text-gray-700 text-lg transition-all"
+          >
+            <IoPeopleSharp className="text-xl" />
+            <span className="text-base">Customers</span>
           </Link>
         </li>
         <li>
