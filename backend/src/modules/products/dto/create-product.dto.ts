@@ -19,11 +19,11 @@ export class CreateProductDto {
     { message: 'Original price must be a decimal' },
   )
   @IsNotEmpty({ message: 'Original price is required' })
-  original_price: number;
+  regular_price: number;
   @IsDecimal(
     { decimal_digits: '0,2' },
     { message: 'Discounted price must be a decimal' },
   )
   @IsNotEmpty({ message: 'Discounted price is required' })
-  discounted_price: number;
+  selling_price: number;
 }

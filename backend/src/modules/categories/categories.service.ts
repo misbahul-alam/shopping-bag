@@ -17,6 +17,7 @@ export class CategoriesService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
   async addCategory(createCategoryDto: CreateCategoryDto) {
+    console.log(createCategoryDto);
     const { name, slug, description } = createCategoryDto;
     const category = await this.categoryRepository.findOne({ where: { slug } });
 
@@ -32,7 +33,7 @@ export class CategoriesService {
       throw new NotFoundException('Category not created');
     }
     await this.categoryRepository.save(newCategory);
-    return newCategory;
+    return { ...newCategory, message: 'Category created successfully' };
   }
 
   async findAllCategory() {

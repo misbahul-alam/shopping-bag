@@ -1,10 +1,13 @@
+import { fetchAllCategories } from "@/lib/categories";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import { FiEdit3, FiEye, FiTrash } from "react-icons/fi";
 
-export default function page() {
+export default async function page() {
+  const { categories } = await fetchAllCategories();
   return (
     <div className="overflow-hidden">
       <div className="flex items-center justify-between">
@@ -38,7 +41,7 @@ export default function page() {
                     </div>
                   </div>
                   <Link href={"/admin/categories/add"}>
-                    <button className="text-sm rounded-sm shadow-sm cursor-pointer bg-blue-500 text-gray-100 px-3 py-1.5 flex gap-2 items-center font-lg">
+                    <button className="text-sm rounded-sm shadow-sm cursor-pointer bg-blue-600 text-white px-3 py-1.5 flex gap-2 items-center font-lg">
                       <FaPlus />
                       <span> Add Category</span>
                     </button>
@@ -75,36 +78,51 @@ export default function page() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 ">
-                      <tr>
-                        <td className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2 ">
-                          <img
-                            src="https://nexus.daisyui.com/images/apps/ecommerce/products/2.jpg"
-                            alt="Image"
-                            className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
-                          />
-                          <span className="line-clamp-2 ">
-                            Fashion And Model
-                          </span>
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          Fashion
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
-                          268
-                        </td>
-                        <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
-                          <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
-                            <FiEye className="text-lg" />
-                          </button>
-                          <button className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer">
-                            <FiEdit3 className="text-lg" />
-                          </button>
+                      {categories.map((category, index) => {
+                        return (
+                          <tr key={index}>
+                            <td className="px-4 py-1 text-sm font-medium text-gray-800 flex items-center gap-2 ">
+                              <Image
+                                src={category.image}
+                                alt="Image"
+                                width={100}
+                                height={100}
+                                className="h-10 w-10 object-cover object-center shadow-sm rounded-sm"
+                              />
+                              <span className="line-clamp-2 ">
+                                {category.name}
+                              </span>
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                              {category.slug}
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-sm text-gray-800 ">
+                              268
+                            </td>
+                            <td className="px-4 py-1 whitespace-nowrap text-end text-sm font-medium flex gap-2 justify-end items-center">
+                              <button
+                                className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer"
+                                aria-label="View"
+                              >
+                                <FiEye className="text-lg" />
+                              </button>
+                              <button
+                                className="p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-all cursor-pointer"
+                                aria-label="Edit"
+                              >
+                                <FiEdit3 className="text-lg" />
+                              </button>
 
-                          <button className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500">
-                            <FiTrash className="text-lg" />
-                          </button>
-                        </td>
-                      </tr>
+                              <button
+                                className="p-2 bg-red-50 rounded-md hover:bg-red-100 transition-all cursor-pointer text-red-500"
+                                aria-label="Delete"
+                              >
+                                <FiTrash className="text-lg" />
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

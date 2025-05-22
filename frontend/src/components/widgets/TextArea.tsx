@@ -35,7 +35,7 @@ export default function TextArea({
         <span className="h-5 opacity-70 text-xl">{icon}</span>
 
         <textarea
-          name={name ?? "text"}
+          name={name}
           className="grow w-full text-base resize-none "
           rows={6}
           placeholder={label}

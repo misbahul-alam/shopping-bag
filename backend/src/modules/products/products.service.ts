@@ -28,8 +28,8 @@ export class ProductsService {
       slug,
       description,
       category_id,
-      original_price,
-      discounted_price,
+      regular_price,
+      selling_price,
     } = createProductDto;
     console.log(category_id);
 
@@ -51,8 +51,8 @@ export class ProductsService {
       slug,
       description,
       category_id,
-      original_price,
-      discounted_price,
+      regular_price,
+      selling_price,
       category,
     });
 
