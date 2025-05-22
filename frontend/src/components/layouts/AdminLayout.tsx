@@ -24,7 +24,7 @@ const AdminLayout: React.FC<LayoutProps> = ({ children }) => {
             Shopping<span className="text-gray-950 font-semibold">Bag</span>
           </h1>
         </Link>
-        <label htmlFor="admin-drawer">
+        <label htmlFor="admin-drawer" className="md:hidden">
           <FiMenu className="text-2xl" />
         </label>
       </div>

@@ -48,7 +48,7 @@ export default function AdminMenu() {
         </li>
         <li>
           <Link
-            href="/admin"
+            href="/admin/customers"
             className="flex items-center gap-2 px-4 py-2.5 hover:bg-gray-100 text-gray-700 text-lg transition-all"
           >
             <IoPeopleSharp className="text-xl" />
