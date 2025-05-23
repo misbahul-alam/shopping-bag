@@ -8,7 +8,10 @@ import { UsersModule } from './modules/users/users.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { ProductsModule } from './modules/products/products.module';
 import { CartsModule } from './modules/carts/carts.module';
+import { CloudinaryService } from './shared/cloudinary/cloudinary.service';
 import databaseConfig from './config/database.config';
+import { MulterModule } from '@nestjs/platform-express';
+import { CloudinaryModule } from './shared/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -17,13 +20,17 @@ import databaseConfig from './config/database.config';
       useFactory: databaseConfig,
     }),
     DatabaseModule,
+    MulterModule.register({
+      dest: './uploads',
+    }),
     AuthModule,
     UsersModule,
     CategoriesModule,
     ProductsModule,
     CartsModule,
+    CloudinaryModule,
   ],
   controllers: [],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule {}

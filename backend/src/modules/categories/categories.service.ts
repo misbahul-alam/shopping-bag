@@ -9,25 +9,33 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from 'src/database/entities/category.entity';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/shared/cloudinary/cloudinary.service';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
-  async addCategory(createCategoryDto: CreateCategoryDto) {
-    console.log(createCategoryDto);
+  async addCategory(
+    createCategoryDto: CreateCategoryDto,
+    image: Express.Multer.File,
+  ) {
     const { name, slug, description } = createCategoryDto;
     const category = await this.categoryRepository.findOne({ where: { slug } });
 
     if (category) {
       throw new ConflictException('Category already exists');
     }
+    const uploadImage = await this.cloudinaryService.uploadFile(image);
+
+    // console.log(imageUrl);
     const newCategory = this.categoryRepository.create({
       name,
       slug,
       description,
+      image: uploadImage.secure_url,
     });
     if (!newCategory) {
       throw new NotFoundException('Category not created');

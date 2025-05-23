@@ -20,12 +20,11 @@ export class CategoriesController {
 
   @Post()
   @UseInterceptors(FileInterceptor('image'))
-  addCategory(
+  async addCategory(
     @Body() createCategoryDto: CreateCategoryDto,
     @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.categoriesService.addCategory(createCategoryDto);
-    // return { message: 'Category created successfully', image: image };
+    return this.categoriesService.addCategory(createCategoryDto, image);
   }
 
   @Get()
