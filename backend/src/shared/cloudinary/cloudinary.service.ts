@@ -22,4 +22,29 @@ export class CloudinaryService {
       stream.pipe(uploadStream);
     });
   }
+  async deleteFile(fileURL: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const publicId = this.extractPublicId(fileURL);
+
+      cloudinary.uploader.destroy(publicId, (error, result) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result);
+      });
+    });
+  }
+  private extractPublicId(fileUrl: string): string {
+    const url = new URL(fileUrl);
+    const parts = url.pathname.split('/');
+
+    const versionIndex = parts.findIndex((part) => /^v\d+/.test(part));
+    const publicIdParts = parts.slice(versionIndex + 1);
+
+    const lastPart = publicIdParts.pop();
+    const baseName = lastPart?.substring(0, lastPart.lastIndexOf('.')) || '';
+    publicIdParts.push(baseName);
+
+    return publicIdParts.join('/');
+  }
 }

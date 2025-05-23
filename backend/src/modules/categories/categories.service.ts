@@ -23,14 +23,19 @@ export class CategoriesService {
     image: Express.Multer.File,
   ) {
     const { name, slug, description } = createCategoryDto;
+    if (!image) {
+      throw new BadRequestException('Image not provided');
+    }
     const category = await this.categoryRepository.findOne({ where: { slug } });
 
     if (category) {
       throw new ConflictException('Category already exists');
     }
     const uploadImage = await this.cloudinaryService.uploadFile(image);
+    if (!uploadImage) {
+      throw new BadRequestException('Image not uploaded');
+    }
 
-    // console.log(imageUrl);
     const newCategory = this.categoryRepository.create({
       name,
       slug,
@@ -72,7 +77,24 @@ export class CategoriesService {
     return updatedCategory;
   }
 
-  deleteCategory(id: string) {
-    return `This action removes a #${id} category`;
+  async deleteCategory(id: string) {
+    const category = await this.categoryRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
+    const deletedCategory = await this.categoryRepository.delete({ id });
+    if (!deletedCategory) {
+      throw new BadRequestException('Category not deleted');
+    }
+    if (
+      category.image !=
+      'https://res.cloudinary.com/misbahulalam/image/upload/v1746076044/photo_g8izaf.png'
+    ) {
+      await this.cloudinaryService.deleteFile(category.image);
+    }
+    return {
+      message: 'Category deleted successfully',
+      deletedCategory,
+    };
   }
 }

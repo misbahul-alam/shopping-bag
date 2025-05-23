@@ -25,10 +25,8 @@ export default function page() {
     if (!images) {
       return;
     }
-    // formData.append("image", images);
-    // formData.append("name", formData.get("name") as string);
-    // formData.append("slug", formData.get("slug") as string);
-    // formData.append("description", formData.get("description") as string);
+    formData.append("image", images);
+
     const res = await createCategory(formData);
     console.log(res);
   };
